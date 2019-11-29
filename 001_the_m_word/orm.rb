@@ -42,6 +42,29 @@ p movie.title = "Doctor Stangelove"
 p movie.director = "Stanley Kubrick"
 
 ================================ insted of
+require 'sqlite3'
+require 'active_record'
+
+# Use `binding.pry` anywhere in this script for easy debugging
+require 'pry'
+
+# Connect to an in-memory sqlite3 database
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: ':memory:'
+)
+
+# Define a minimal database schema
+ActiveRecord::Schema.define do
+  create_table :shows, force: true do |t|
+    t.string :name
+  end
+
+  create_table :episodes, force: true do |t|
+    t.string :name
+    t.belongs_to :show, index: true
+  end
+end
 
 class Movie < ActiveRecord::Base
 end
