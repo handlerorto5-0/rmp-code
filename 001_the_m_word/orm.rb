@@ -54,18 +54,6 @@ ActiveRecord::Base.establish_connection(
   database: ':memory:'
 )
 
-# Define a minimal database schema
-ActiveRecord::Schema.define do
-  create_table :shows, force: true do |t|
-    t.string :name
-  end
-
-  create_table :episodes, force: true do |t|
-    t.string :name
-    t.belongs_to :show, index: true
-  end
-end
-
 class Movie < ActiveRecord::Base
 end
 
